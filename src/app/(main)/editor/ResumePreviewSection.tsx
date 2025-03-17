@@ -18,8 +18,8 @@ const ResumePreviewSection = ({
       className={cn("group relative hidden w-full md:flex md:w-1/2", className)}
     >
       <div className="absolute top-1 left-1 flex flex-none flex-col gap-3 opacity-50 transition-opacity group-hover:opacity-100 lg:top-3 lg:left-3 xl:opacity-100">
-        <div>Color Picker</div>
-        <div>Border Style</div>
+        <div>C</div>
+        <div>B</div>
       </div>
       <div className="bg-secondary flex w-full justify-center overflow-y-auto p-3">
         <ResumePreview
