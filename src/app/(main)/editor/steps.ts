@@ -2,6 +2,7 @@ import { EditorFormProps } from "@/lib/types";
 import GeneralInfoForm from "./forms/GeneralInfoForm";
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 import WorkExperienceForm from "./forms/WorkExperienceForm";
+import EducationForm from "./forms/EducationForm";
 
 //! an array of objects
 //! each object has a title, component(The form we want to render), and key(what we put to the url to open the form when we refresh a page)
@@ -17,4 +18,5 @@ export const steps: {
     component: WorkExperienceForm,
     key: "work-experience",
   },
+  { title: "Education", component: EducationForm, key: "education" },
 ];
