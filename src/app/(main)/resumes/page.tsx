@@ -1,9 +1,16 @@
-const Resume = () => {
+import { Metadata } from "next";
+import CreateResumeButton from "./CreateResumeButton";
+
+export const metadata: Metadata = {
+  title: "Your resumes",
+};
+
+const Resumes = () => {
   return (
-    <div>
-      <h1 className="text-purple-400">Your Resumes</h1>
-    </div>
+    <main className="mx-auto w-full max-w-7xl space-y-6 px-3 py-6">
+      <CreateResumeButton canCreate={true} />
+    </main>
   );
 };
 
-export default Resume;
+export default Resumes;
