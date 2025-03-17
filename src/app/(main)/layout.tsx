@@ -6,7 +6,7 @@ export default async function layout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col">
       <Navbar />
       {children}
     </div>
