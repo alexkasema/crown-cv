@@ -68,6 +68,18 @@ export const educationSchema = z.object({
 
 export type EducationValues = z.infer<typeof educationSchema>;
 
+export const skillsSchema = z.object({
+  skills: z.array(z.string().trim()).optional(),
+});
+
+export type SkillsValues = z.infer<typeof skillsSchema>;
+
+export const summarySchema = z.object({
+  summary: optionalString,
+});
+
+export type SummaryValues = z.infer<typeof summarySchema>;
+
 //! We can merge two schemas together using the shape property
 //! This way we can create a schema that includes all the fields from all schemas
 export const resumeSchema = z.object({
@@ -75,6 +87,8 @@ export const resumeSchema = z.object({
   ...personalInfoSchema.shape,
   ...workExperienceSchema.shape,
   ...educationSchema.shape,
+  ...skillsSchema.shape,
+  ...summarySchema.shape,
 });
 
 //! Extend the type because when we update an already existing resume we have an id field
