@@ -3,8 +3,27 @@
 import { cn } from "@/lib/utils";
 import Footer from "./Footer";
 import GeneralInfoForm from "./forms/GeneralInfoForm";
+import PersonalInfoForm from "./forms/PersonalInfoForm";
+import { useSearchParams } from "next/navigation";
+import { steps } from "./steps";
+import Breadcrumbs from "./Breadcrumbs";
 
 const ResumeEditor = () => {
+  const searchParams = useSearchParams();
+
+  const currentStep = searchParams.get("step") || steps[0].key;
+
+  //! update the URL with the current step
+  function setStep(key: string) {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("step", key);
+    window.history.pushState(null, "", `?${newSearchParams.toString()}`);
+  }
+
+  const FormComponent = steps.find(
+    (step) => step.key === currentStep,
+  )?.component;
+
   return (
     <div className="flex grow flex-col">
       <header className="space-y-1.5 border-b px-3 py-5 text-center">
@@ -21,13 +40,14 @@ const ResumeEditor = () => {
               "w-full space-y-6 overflow-y-auto p-3 md:block md:w-1/2",
             )}
           >
-            <GeneralInfoForm />
+            <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
+            {FormComponent && <FormComponent />}
           </div>
           <div className="grow md:border-r" />
           <div className="hidden w-1/2 md:flex">Resume preview</div>
         </div>
       </main>
-      <Footer />
+      <Footer currentStep={currentStep} setCurrentStep={setStep} />
     </div>
   );
 };
