@@ -7,11 +7,14 @@ import { useState } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
 import { steps } from "./steps";
+import ResumePreviewSection from "./ResumePreviewSection";
 
 const ResumeEditor = () => {
   const searchParams = useSearchParams();
 
   const [resumeData, setResumeData] = useState<ResumeValues>({});
+
+  const [showSmResumePreview, setShowSmResumePreview] = useState(false);
 
   const currentStep = searchParams.get("step") || steps[0].key;
 
@@ -40,6 +43,7 @@ const ResumeEditor = () => {
           <div
             className={cn(
               "w-full space-y-6 overflow-y-auto p-3 md:block md:w-1/2",
+              showSmResumePreview && "hidden",
             )}
           >
             <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
@@ -51,10 +55,11 @@ const ResumeEditor = () => {
             )}
           </div>
           <div className="grow md:border-r" />
-          <div className="hidden w-1/2 md:flex">
-            Resume preview
-            <pre>{JSON.stringify(resumeData, null, 2)}</pre>
-          </div>
+          <ResumePreviewSection
+            resumeData={resumeData}
+            setResumeData={setResumeData}
+            className={cn(showSmResumePreview && "flex")}
+          />
         </div>
       </main>
       <Footer currentStep={currentStep} setCurrentStep={setStep} />
