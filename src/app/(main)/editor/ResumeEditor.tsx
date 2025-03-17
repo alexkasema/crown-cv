@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Footer from "./Footer";
+import GeneralInfoForm from "./forms/GeneralInfoForm";
 
 const ResumeEditor = () => {
   return (
@@ -20,8 +21,10 @@ const ResumeEditor = () => {
               "w-full space-y-6 overflow-y-auto p-3 md:block md:w-1/2",
             )}
           >
-            Breadcrumbs
+            <GeneralInfoForm />
           </div>
+          <div className="grow md:border-r" />
+          <div className="hidden w-1/2 md:flex">Resume preview</div>
         </div>
       </main>
       <Footer />
