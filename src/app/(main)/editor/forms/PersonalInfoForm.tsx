@@ -12,18 +12,19 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { EditorFormProps } from "@/lib/types";
 
-const PersonalInfoForm = () => {
+const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
   const form = useForm<PersonalInfoValues>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      jobTitle: "",
-      city: "",
-      country: "",
-      phone: "",
-      email: "",
+      firstName: resumeData.firstName || "",
+      lastName: resumeData.lastName || "",
+      jobTitle: resumeData.jobTitle || "",
+      city: resumeData.city || "",
+      country: resumeData.country || "",
+      phone: resumeData.phone || "",
+      email: resumeData.email || "",
     },
   });
 
@@ -32,9 +33,10 @@ const PersonalInfoForm = () => {
       const isValid = await form.trigger();
       if (!isValid) return;
       //! Update the resume data in the page
+      setResumeData({ ...resumeData, ...values });
     });
     return unsubscribe;
-  }, [form]);
+  }, [form, resumeData, setResumeData]);
 
   return (
     <div className="mx-auto max-w-xl space-y-6">

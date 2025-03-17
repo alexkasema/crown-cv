@@ -36,3 +36,19 @@ export const personalInfoSchema = z.object({
 });
 
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
+
+//! We can merge two schemas together using the shape property
+//! This way we can create a schema that includes all the fields from all schemas
+export const resumeSchema = z.object({
+  ...generalInfoSchema.shape,
+  ...personalInfoSchema.shape,
+});
+
+//! Extend the type because when we update an already existing resume we have an id field
+//! When we create a new resume we don't yet have an id
+//! We will store the id in This resume values together with all other fields but independently of the forms
+//! omit the photo field and use the one we have specified in the ResumeValues type
+export type ResumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {
+  id?: string;
+  photo?: File | string | null;
+};
