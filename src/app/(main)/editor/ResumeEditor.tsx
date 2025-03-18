@@ -8,6 +8,8 @@ import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
 import { steps } from "./steps";
 import ResumePreviewSection from "./ResumePreviewSection";
+import useAutoSaveResume from "./useAutoSaveResume";
+import useUnloadWarning from "@/hooks/useUnloadWarning";
 
 const ResumeEditor = () => {
   const searchParams = useSearchParams();
@@ -15,6 +17,10 @@ const ResumeEditor = () => {
   const [resumeData, setResumeData] = useState<ResumeValues>({});
 
   const [showSmResumePreview, setShowSmResumePreview] = useState(false);
+
+  const { isSaving, hasUnsavedChanges } = useAutoSaveResume(resumeData);
+  //! show the unsaved changes warning
+  useUnloadWarning(hasUnsavedChanges);
 
   const currentStep = searchParams.get("step") || steps[0].key;
 
@@ -67,6 +73,7 @@ const ResumeEditor = () => {
         setCurrentStep={setStep}
         showSmResumePreview={showSmResumePreview}
         setShowSmResumePreview={setShowSmResumePreview}
+        isSaving={isSaving}
       />
     </div>
   );
