@@ -11,6 +11,8 @@ import path from "path";
 export async function saveResume(values: ResumeValues) {
   const { id } = values;
 
+  console.log("received values", values);
+
   //! This will take the values and run them through the schema for validation
   const { photo, workExperiences, educations, ...resumeValues } =
     resumeSchema.parse(values);
