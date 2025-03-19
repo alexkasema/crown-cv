@@ -1,6 +1,8 @@
 "use server";
 
+import { canCreateResume, canUseCustomizations } from "@/lib/permissions";
 import prisma from "@/lib/prisma";
+import { getUserSubscriptionLevel } from "@/lib/subscriptions";
 import { resumeSchema, ResumeValues } from "@/lib/validation";
 import { auth } from "@clerk/nextjs/server";
 
@@ -21,7 +23,19 @@ export async function saveResume(values: ResumeValues) {
     throw new Error("User not authenticated");
   }
 
-  // TODO Check resume count for non-premium users
+  //! Check resume count for non-premium users
+  const subscriptionLevel = await getUserSubscriptionLevel(userId);
+
+  //! we have to check because we are creating a new resume
+  if (!id) {
+    const resumeCount = await prisma.resume.count({ where: { userId } });
+
+    if (!canCreateResume(subscriptionLevel, resumeCount)) {
+      throw new Error(
+        "Maximum resume count reached for this subscription level",
+      );
+    }
+  }
 
   //! if the id is present then we will update the resume else we will create a new resume
   const existingResume = id
@@ -30,6 +44,21 @@ export async function saveResume(values: ResumeValues) {
 
   if (id && !existingResume) {
     throw new Error("Resume not found");
+  }
+
+  //! A user should be able to edit their resume and keep their border and color style if they unsubscribed
+  //! from the payment plan.
+  //! They should not be able to change the border and color style if they are on the free plan.
+  //! only if these conditions are true we have new customizations
+  const hasCustomizations =
+    (resumeValues.borderStyle &&
+      resumeValues.borderStyle !== existingResume?.borderStyle) ||
+    (resumeValues.colorHex &&
+      resumeValues.colorHex !== existingResume?.colorHex);
+
+  //! Check if the user is allowed to apply these customizations
+  if (hasCustomizations && !canUseCustomizations(subscriptionLevel)) {
+    throw new Error("Customizations not allowed for this subscription level");
   }
 
   //! before inserting the resume data into the db, we have to upload the photo to the blob storage because

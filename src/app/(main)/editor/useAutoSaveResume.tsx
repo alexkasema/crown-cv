@@ -62,7 +62,7 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
         setIsError(true);
         console.error(error);
         toast.custom((t) => (
-          <div className="space-y-3 border border-r-4 border-red-500 p-3 backdrop-blur-3xl">
+          <div className="space-y-3 border border-r-4 border-red-500 p-3">
             <p className="text-red-500">Could not save changes.</p>
             <Button
               variant="secondary"

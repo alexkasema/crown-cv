@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Circle, Square, Squircle } from "lucide-react";
+import { useSubscriptionLevel } from "../SubscriptionLevelProvider";
+import usePremiumModal from "@/hooks/usePremiumModal";
+import { canUseCustomizations } from "@/lib/permissions";
 
 export const BorderStyles = {
   SQUARE: "square",
@@ -18,7 +21,15 @@ const BorderStyleButton = ({
   borderStyle,
   onChange,
 }: BorderStyleButtonProps) => {
+  const subscriptionLevel = useSubscriptionLevel();
+
+  const premiumModal = usePremiumModal();
+
   function handleClick() {
+    if (!canUseCustomizations(subscriptionLevel)) {
+      premiumModal.setOpen(true);
+      return;
+    }
     const currentIndex = borderStyle ? borderStyles.indexOf(borderStyle) : 0;
     //! This makes sure the nextIndex doesn't exceed the last index
     const nextIndex = (currentIndex + 1) % borderStyles.length;

@@ -27,6 +27,9 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import LoadingButton from "@/components/LoadingButton";
+import { useSubscriptionLevel } from "../../SubscriptionLevelProvider";
+import usePremiumModal from "@/hooks/usePremiumModal";
+import { canUseAITools } from "@/lib/permissions";
 
 interface GenerateWorkExperienceButtonProps {
   onWorkExperienceGenerated: (workExperience: WorkExperience) => void;
@@ -36,6 +39,9 @@ const GenerateWorkExperienceButton = ({
   onWorkExperienceGenerated,
 }: GenerateWorkExperienceButtonProps) => {
   const [showInputDialog, setShowInputDialog] = useState(false);
+  const subscriptionLevel = useSubscriptionLevel();
+
+  const premiumModal = usePremiumModal();
   return (
     <>
       <Button
@@ -43,6 +49,10 @@ const GenerateWorkExperienceButton = ({
         type="button"
         // TODO Block for non premium users
         onClick={() => {
+          if (!canUseAITools(subscriptionLevel)) {
+            premiumModal.setOpen(true);
+            return;
+          }
           setShowInputDialog(true);
         }}
       >
