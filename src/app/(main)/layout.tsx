@@ -1,3 +1,4 @@
+import PremiumModal from "@/components/premium/PremiumModal";
 import Navbar from "./Navbar";
 
 export default async function layout({
@@ -9,6 +10,7 @@ export default async function layout({
     <div className="flex min-h-screen flex-col">
       <Navbar />
       {children}
+      <PremiumModal />
     </div>
   );
 }
