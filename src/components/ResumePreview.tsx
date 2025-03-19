@@ -20,7 +20,7 @@ const ResumePreview = ({
 }: ResumePreviewProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  //   @ts-ignore
+  // @ts-expect-error because RefObject<HTMLDivElement | null> is not assignable to Ref<HTMLDivElement>
   const { width } = useDimensions(containerRef);
   return (
     <div

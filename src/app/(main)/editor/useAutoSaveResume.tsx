@@ -99,7 +99,6 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
     isError,
     resumeId,
     searchParams,
-    toast,
   ]);
   return {
     isSaving,
