@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![App Images](./assets/Logo.png)
 
-## Getting Started
+<h1 align="center">Crown CV - AI-Powered Resume Builder</h1>
 
-First, run the development server:
+<p align="center">
+  <b>Generate professional resumes effortlessly with AI-powered assistance.</b>
+</p>
+
+<p align="center">
+  <a href="https://crown-cv.vercel.app/" target="_blank"><b>🔗 Live Demo</b></a> •
+  <a href="#features"><b>🚀 Features</b></a> •
+  <a href="#installation"><b>⚙️ Installation</b></a> •
+  <a href="#contributing"><b>🤝 Contributing</b></a>
+</p>
+
+---
+
+## 🌟 About Crown CV
+
+Crown CV is a **SaaS application** that allows users to build professional resumes using AI-powered suggestions. Users can dynamically edit and customize their resumes, leveraging AI to enhance their **work experience, professional summaries, and formatting** with ease.
+
+## 🚀 Features
+
+✅ **AI Resume Generation** – Automatically generate work experiences and summaries with OpenAI.  
+✅ **Live Resume Preview** – See real-time updates as you fill out your resume.  
+✅ **Drag & Drop** – Reorder work experience and education sections effortlessly.  
+✅ **Autosave** – Resume content is automatically saved after 2 seconds of inactivity.  
+✅ **Customization Options** – Adjust skill badge styles, profile picture shapes, and resume colors.  
+✅ **Dark Mode** – A sleek and modern dark mode interface.  
+✅ **Print & Download** – Save or print your resume directly.  
+✅ **Secure Authentication** – Sign in with **Clerk** authentication.  
+✅ **Subscription System** – Unlock premium features via **Stripe-powered subscriptions**.  
+✅ **Optimized Storage** – Store profile images securely with **Vercel Blobs**.  
+✅ **Fast & Scalable** – Built with **Next.js 15, Prisma, PostgreSQL, and Zustand** for efficiency.
+
+## 🏗️ Tech Stack
+
+- **Frontend:** Next.js 15, TypeScript, Tailwind CSS, shadcn
+- **State Management:** Zustand
+- **Backend:** PostgreSQL, Prisma ORM, OpenAI API
+- **Authentication:** Clerk
+- **File Storage:** Vercel Blobs
+- **Payments:** Stripe
+- **Forms:** React Hook Form, shadcn UI
+
+## ⚙️ Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/alexkasema/crown-cv.git
+cd crown-cv
+
+# Install dependencies
+yarn install  # or npm install
+
+# Run the development server
+yarn dev  # or npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📜 Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Make sure to set up a `.env` file with the following variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```plaintext
+POSTGRES_URL_NON_POOLING=
+POSTGRES_PRISMA_URL=
+CLERK_SECRET_KEY=
+BLOB_READ_WRITE_TOKEN=
+DATABASE_URL=
+OPENAI_API_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_MONTHLY=
+NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_PLUS_MONTHLY=
+NEXT_PUBLIC_BASE_URL=
+```
 
-## Learn More
+## 📌 Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. **Sign up or log in** using Clerk authentication.
+2. **Fill in resume details** (Personal Info, Work Experience, Education, Skills, Summary).
+3. **Use AI assistance** to generate professional resume sections.
+4. **Customize the resume** with different styles and themes.
+5. **Upgrade to premium** for extra features.
+6. **Download or print** your resume.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Crown CV is deployed on **Vercel**. To deploy your own version:
 
-## Deploy on Vercel
+1. Push your code to GitHub.
+2. Connect your repository to **Vercel**.
+3. Set environment variables in **Vercel Dashboard**.
+4. Deploy with a single click!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📖 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! 🚀 If you’d like to improve **Crown CV**, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Make your changes and commit (`git commit -m "Add new feature"`).
+4. Push to your fork (`git push origin feature-name`).
+5. Open a **Pull Request**.
+
+## 📸 Screenshots
+
+![App Images](./public/HomePage.png)
+![App Images](./public/ResumePage.png)
+![App Images](./public/ResumeDesign.png)
+![App Images](./public/SubscriptionDialog.png)
+![App Images](./public/resumePreview.jpg)
+
+## 🛡️ License
+
+This project is licensed under the **MIT License**.
+
+## 📬 Contact
+
+For questions or collaborations, reach out via:
+
+- **Email:** lexmulwa@gmail.com
+- **LinkedIn:** [Alex Kasema](https://www.linkedin.com/in/alexkasema/)
+
+---
+
+<p align="center">💡 <b>Empower your career with Crown CV! Build your resume in minutes.</b></p>
+
+---
