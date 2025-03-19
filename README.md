@@ -1,4 +1,4 @@
-![App Images](./assets/Logo.png)
+![App Images](./public/Logo1.png)
 
 <h1 align="center">Crown CV - AI-Powered Resume Builder</h1>
 
@@ -110,10 +110,10 @@ Contributions are welcome! 🚀 If you’d like to improve **Crown CV**, follow 
 ## 📸 Screenshots
 
 ![App Images](./public/HomePage.png)
-![App Images](./public/ResumePage.png)
+![App Images](./public/ResumesPage.png)
 ![App Images](./public/ResumeDesign.png)
 ![App Images](./public/SubscriptionDialog.png)
-![App Images](./public/resumePreview.jpg)
+![App Images](./public/resumePreview.png)
 
 ## 🛡️ License
 
