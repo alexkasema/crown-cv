@@ -6,6 +6,8 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import usePremiumModal from "@/hooks/usePremiumModal";
 import { useState } from "react";
+import { createCheckoutSession } from "./actions";
+import { env } from "@/env";
 
 const premiumFeatures = ["AI tools", "Up to 3 resumes"];
 const premiumPlusFeatures = ["Infinite resumes", "Design customizations"];
@@ -14,6 +16,19 @@ const PremiumModal = () => {
   const { open, setOpen } = usePremiumModal();
 
   const [loading, setLoading] = useState(false);
+
+  async function handlePremiumClick(priceId: string) {
+    try {
+      setLoading(true);
+      const redirectUrl = await createCheckoutSession(priceId);
+      window.location.href = redirectUrl;
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Dialog
@@ -41,7 +56,16 @@ const PremiumModal = () => {
                   </li>
                 ))}
               </ul>
-              <Button>Get Premium</Button>
+              <Button
+                onClick={() =>
+                  handlePremiumClick(
+                    env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_MONTHLY!,
+                  )
+                }
+                disabled={loading}
+              >
+                Get Premium
+              </Button>
             </div>
 
             <div className="mx-6 border-l" />
@@ -57,7 +81,17 @@ const PremiumModal = () => {
                   </li>
                 ))}
               </ul>
-              <Button variant="premium">Get Premium Plus</Button>
+              <Button
+                variant="premium"
+                onClick={() =>
+                  handlePremiumClick(
+                    env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_PLUS_MONTHLY!,
+                  )
+                }
+                disabled={loading}
+              >
+                Get Premium Plus
+              </Button>
             </div>
           </div>
         </div>
